@@ -9,7 +9,24 @@
       "installRoot": "${projectDir}\\out\\install\\${name}",
       "cmakeCommandArgs": "",
       "buildCommandArgs": "",
-      "ctestCommandArgs": ""
+      "ctestCommandArgs": "",
+      "variables": [
+        {
+          "name": "Protobuf_DIR",
+          "value": "K:/work/GrpcClientServerApp/external/grpc",
+          "type": "PATH"
+        },
+        {
+          "name": "gRPC_DIR",
+          "value": "K:/work/GrpcClientServerApp/external/grpc",
+          "type": "PATH"
+        },
+        {
+          "name": "absl_DIR",
+          "value": "K:/work/GrpcClientServerApp/external/grpc",
+          "type": "PATH"
+        }
+      ]
     }
   ]
 }
