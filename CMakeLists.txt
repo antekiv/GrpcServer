@@ -34,7 +34,9 @@ endif()
   
 # Proto file
 get_filename_component(hw_proto "Src/Proto/helloworld.proto" ABSOLUTE)
+message("get_filename_component_absolute ${hw_proto}")
 get_filename_component(hw_proto_path "${hw_proto}" PATH)
+message("get_filename_component_path ${hw_proto_path}")
 
 # Generated sources
 set(hw_proto_srcs "${CMAKE_CURRENT_BINARY_DIR}/helloworld.pb.cc")
