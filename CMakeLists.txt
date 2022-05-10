@@ -1,10 +1,6 @@
 cmake_minimum_required(VERSION 3.2 FATAL_ERROR)
 
 project(GrpcClientServerApp)
-
-add_subdirectory(src/Client)
-# add_subdirectory(src/Server)
-# add_subdirectory(src/Proto)
    
 if(MSVC)
   add_definitions(-D_WIN32_WINNT=0x600)
@@ -37,7 +33,7 @@ else()
 endif()
   
 # Proto file
-get_filename_component(hw_proto "src/Proto/helloworld.proto" ABSOLUTE)
+get_filename_component(hw_proto "Src/Proto/helloworld.proto" ABSOLUTE)
 get_filename_component(hw_proto_path "${hw_proto}" PATH)
 
 # Generated sources
@@ -69,13 +65,20 @@ target_link_libraries(hw_grpc_proto
   ${_GRPC_GRPCPP}
   ${_PROTOBUF_LIBPROTOBUF})
 
-# Targets greeter_[async_](client|server)
-foreach(_target
-  greeter_client greeter_server)
-  add_executable(${_target} "${_target}.cc")
-  target_link_libraries(${_target}
+# Targets greeter_client and greeter_server
+set(_target_client greeter_client)
+set(_target_server greeter_server)
+
+add_executable(${_target_client} "Src/Client/${_target_client}.cc")
+  target_link_libraries(${_target_client}
     hw_grpc_proto
     ${_REFLECTION}
     ${_GRPC_GRPCPP}
     ${_PROTOBUF_LIBPROTOBUF})
-endforeach()
+
+add_executable(${_target_server} "Src/Server/${_target_server}.cc")
+  target_link_libraries(${_target_server}
+    hw_grpc_proto
+    ${_REFLECTION}
+    ${_GRPC_GRPCPP}
+    ${_PROTOBUF_LIBPROTOBUF})
