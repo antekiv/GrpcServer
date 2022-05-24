@@ -38,26 +38,23 @@ message("get_filename_component_absolute ${hw_proto}")
 get_filename_component(hw_proto_path "${hw_proto}" PATH)
 message("get_filename_component_path ${hw_proto_path}")
 
-set(proto_out_dir "${CMAKE_CURRENT_BINARY_DIR}/Protos")
-
 # Generated sources
-set(hw_proto_srcs "${proto_out_dir}/helloworld.pb.cc")
-set(hw_proto_hdrs "${proto_out_dir}/helloworld.pb.h")
-set(hw_grpc_srcs "${proto_out_dir}/helloworld.grpc.pb.cc")
-set(hw_grpc_hdrs "${proto_out_dir}/helloworld.grpc.pb.h")
-
+set(hw_proto_srcs "${CMAKE_CURRENT_BINARY_DIR}/helloworld.pb.cc")
+set(hw_proto_hdrs "${CMAKE_CURRENT_BINARY_DIR}/helloworld.pb.h")
+set(hw_grpc_srcs "${CMAKE_CURRENT_BINARY_DIR}/helloworld.grpc.pb.cc")
+set(hw_grpc_hdrs "${CMAKE_CURRENT_BINARY_DIR}/helloworld.grpc.pb.h")
 add_custom_command(
       OUTPUT "${hw_proto_srcs}" "${hw_proto_hdrs}" "${hw_grpc_srcs}" "${hw_grpc_hdrs}"
       COMMAND ${_PROTOBUF_PROTOC}
-      ARGS --grpc_out "${proto_out_dir}"
-        --cpp_out "${proto_out_dir}"
+      ARGS --grpc_out "${CMAKE_CURRENT_BINARY_DIR}"
+        --cpp_out "${CMAKE_CURRENT_BINARY_DIR}"
         -I "${hw_proto_path}"
         --plugin=protoc-gen-grpc="${_GRPC_CPP_PLUGIN_EXECUTABLE}"
         "${hw_proto}"
       DEPENDS "${hw_proto}")
 
 # Include generated *.pb.h files
-include_directories("${proto_out_dir}")
+include_directories("${CMAKE_CURRENT_BINARY_DIR}")
 
 # hw_grpc_proto
 add_library(hw_grpc_proto
@@ -75,17 +72,15 @@ set(_target_client greeter_client)
 set(_target_server greeter_server)
 
 add_executable(${_target_client} "Src/Client/${_target_client}.cc")
-target_link_libraries(${_target_client}
-  hw_grpc_proto
-  ${_REFLECTION}
-  ${_GRPC_GRPCPP}
-  ${_PROTOBUF_LIBPROTOBUF}
-)
+  target_link_libraries(${_target_client}
+    hw_grpc_proto
+    ${_REFLECTION}
+    ${_GRPC_GRPCPP}
+    ${_PROTOBUF_LIBPROTOBUF})
 
 add_executable(${_target_server} "Src/Server/${_target_server}.cc")
-target_link_libraries(${_target_server}
-  hw_grpc_proto
-  ${_REFLECTION}
-  ${_GRPC_GRPCPP}
-  ${_PROTOBUF_LIBPROTOBUF}
-)
+  target_link_libraries(${_target_server}
+    hw_grpc_proto
+    ${_REFLECTION}
+    ${_GRPC_GRPCPP}
+    ${_PROTOBUF_LIBPROTOBUF})
