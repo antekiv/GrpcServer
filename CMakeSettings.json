@@ -1,32 +1,15 @@
 ﻿{
   "configurations": [
     {
-      "name": "x64-Debug",
+      "name": "x64-Release",
       "generator": "Visual Studio 17 2022 Win64",
-      "configurationType": "Debug",
+      "configurationType": "Release",
       "inheritEnvironments": [ "msvc_x64_x64" ],
       "buildRoot": "${projectDir}\\out\\build\\${name}",
       "installRoot": "${projectDir}\\out\\install\\${name}",
       "cmakeCommandArgs": "",
       "buildCommandArgs": "",
-      "ctestCommandArgs": "",
-      "variables": [
-        {
-          "name": "Protobuf_DIR",
-          "value": "K:/work/GrpcClientServerApp/external/grpc",
-          "type": "PATH"
-        },
-        {
-          "name": "gRPC_DIR",
-          "value": "K:/work/GrpcClientServerApp/external/grpc",
-          "type": "PATH"
-        },
-        {
-          "name": "absl_DIR",
-          "value": "K:/work/GrpcClientServerApp/external/grpc",
-          "type": "PATH"
-        }
-      ]
+      "ctestCommandArgs": ""
     }
   ]
 }
