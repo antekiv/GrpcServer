@@ -1,12 +1,6 @@
-cmake_minimum_required(VERSION 3.2 FATAL_ERROR)
-
-project(GrpcClientServerApp)
-   
-
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
-
 
 # cache variables
 set(PostgreSQL_ROOT "C:/Program Files/PostgreSQL/14" CACHE PATH "The default path to PostgreSQL directory")
